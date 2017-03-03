@@ -14,7 +14,7 @@ namespace Portfolio.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
-            List<Project> projectList = Project.GetTopThreeProjects();
+            List<Project.RootObject> projectList = Project.GetTopThreeProjects();
             return View(projectList);
         }
     }

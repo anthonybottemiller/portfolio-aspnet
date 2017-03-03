@@ -104,7 +104,7 @@ namespace Portfolio.Models
             public string default_branch { get; set; }
         }
 
-        public static List<Project> GetTopThreeProjects()
+        public static List<Project.RootObject> GetTopThreeProjects()
         {
             var client = new RestClient("https://api.github.com");
             client.Authenticator = new HttpBasicAuthenticator("token", EnvironmentVariables.AccessToken);
@@ -116,13 +116,13 @@ namespace Portfolio.Models
             request.AddParameter("per_page", "3");
 
             var response = new RestResponse();
+
             Task.Run(async () =>
             {
                 response = await GetResponseContentAsync(client, request) as RestResponse;
             }).Wait();
-            JArray jsonResponse = JsonConvert.DeserializeObject<JArray>(response.Content);
-            var projectList = JsonConvert.DeserializeObject<List<Project>>(jsonResponse.ToString());
-            return projectList;
+            var jsonResponse = JsonConvert.DeserializeObject<List<Project.RootObject>>(response.Content);
+            return jsonResponse;
         }
 
         public static Task<IRestResponse> GetResponseContentAsync(RestClient theClient, RestRequest theRequest)
