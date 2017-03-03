@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
 
-namespace portfolio
+namespace Portfolio
 {
     public class Startup
     {
@@ -41,7 +41,8 @@ namespace portfolio
 
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync("<h1>Something went awry!</h1>");
+                await context.Response.WriteAsync
+                ("<h1>Something went awry!</h1><img src='/img/error.png' />");
             });
         }
     }

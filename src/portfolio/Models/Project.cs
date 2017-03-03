@@ -1,9 +1,13 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using RestSharp;
+using RestSharp.Authenticators;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace portfolio.Models
+namespace Portfolio.Models
 {
     public class Project
     {
@@ -99,5 +103,36 @@ namespace portfolio.Models
             public int watchers { get; set; }
             public string default_branch { get; set; }
         }
+
+        public static List<Project> GetTopThreeProjects()
+        {
+            var client = new RestClient("https://api.github.com");
+            client.Authenticator = new HttpBasicAuthenticator("token", EnvironmentVariables.AccessToken);
+
+            var request = new RestRequest("/users/anthonybottemiller/repos", Method.GET);
+            request.AddHeader("User-Agent", "anthonybottemiller");
+            request.AddParameter("sort", "stars");
+            request.AddParameter("order", "desc");
+            request.AddParameter("per_page", "3");
+
+            var response = new RestResponse();
+            Task.Run(async () =>
+            {
+                response = await GetResponseContentAsync(client, request) as RestResponse;
+            }).Wait();
+            JArray jsonResponse = JsonConvert.DeserializeObject<JArray>(response.Content);
+            var projectList = JsonConvert.DeserializeObject<List<Project>>(jsonResponse.ToString());
+            return projectList;
+        }
+
+        public static Task<IRestResponse> GetResponseContentAsync(RestClient theClient, RestRequest theRequest)
+        {
+            var tcs = new TaskCompletionSource<IRestResponse>();
+            theClient.ExecuteAsync(theRequest, response => {
+                tcs.SetResult(response);
+            });
+            return tcs.Task;
+        }
+
     }
 }
