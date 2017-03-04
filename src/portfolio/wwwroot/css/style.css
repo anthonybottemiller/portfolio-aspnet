@@ -1,2 +1,19 @@
-﻿body {
+﻿a {
+    color: #FF8500;
+}
+body {
+    color: white;
+    background-color: #430D99;
+}
+.header{
+    border: 5px solid #75AACC;
+    background-color: #75AACC;
+    border-radius: 15px 15px;
+}
+.project-display {
+    width: 500px;
+    margin: 5px;
+    background-color: #3757ff;
+    border: 5px solid #3757ff;
+    border-radius: 15px 15px;
 }

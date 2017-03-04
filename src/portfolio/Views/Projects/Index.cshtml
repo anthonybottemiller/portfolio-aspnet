@@ -5,5 +5,10 @@
 <h1>Projects</h1>
 @foreach (var Project in Model)
 { 
-    <div>@Project.name</div>
+    <div class="project-display">
+    <h4>@Project.name</h4>
+        <p>Stars: @Project.stargazers_count</p>
+        <p>Description: @Project.description</p>
+        <a href="@Project.html_url">Go check out the code</a>
+    </div>
 }
