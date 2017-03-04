@@ -7,7 +7,15 @@ body {
     background-color: #430D99;
 }
 
+.portfolio-image{
+    margin-right: 5px;
+    float: left;
+    width: 150px;
+}
+
 .header{
+    padding: 10px;
+    margin: 5px;
     border: 5px solid #75AACC;
     background-color: #75AACC;
     border-radius: 15px 15px;
@@ -18,7 +26,7 @@ body {
 }
 
 .project-display {
-    width: 500px;
+    display: inline-block;
     margin: 5px;
     padding: 10px;
     background-color: #3757ff;
