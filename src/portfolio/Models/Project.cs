@@ -109,12 +109,8 @@ namespace Portfolio.Models
             var client = new RestClient("https://api.github.com");
             client.Authenticator = new HttpBasicAuthenticator("token", EnvironmentVariables.AccessToken);
 
-            var request = new RestRequest("/users/anthonybottemiller/repos", Method.GET);
+            var request = new RestRequest("/users/anthonybottemiller/starred?sort=stars&direction=dec&per_page=3", Method.GET);
             request.AddHeader("User-Agent", "anthonybottemiller");
-            request.AddParameter("sort", "stars");
-            request.AddParameter("order", "desc");
-            request.AddParameter("per_page", "3");
-
             var response = new RestResponse();
 
             Task.Run(async () =>
