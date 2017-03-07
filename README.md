@@ -29,6 +29,7 @@ The style of the project was inspired by [Bjarne Stroustrup](http://www.stroustr
 * Using command line change working directory to cloned repository
 * Execute command "cd /src/portfolio"
 * In the models folder you must open EnvironmentVariablesTemplate and replace "YourKey" with a github access token with permissions for public repos.
+* Save Template as EnvironmentVariables
 * Execute command "dotnet restore" in order to resolve project dependencies
 * Execute command "dotnet run"
 * Navigate to [webserver](http://localhost:5000) using your favorite browser
